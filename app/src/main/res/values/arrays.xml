@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="coloris">
+        <item>Choix du coloris</item>
+        <item>Rouge</item>
+        <item>Jaune</item>
+        <item>Vert</item>
+        <item>Bleu</item>
+    </string-array>
+
+    <string-array name="taille">
+        <item>Choix de la taille</item>
+        <item>S</item>
+        <item>M</item>
+        <item>L</item>
+        <item>XL</item>
+        <item>XXL</item>
+    </string-array>
+</resources>

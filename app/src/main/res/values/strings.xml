@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Boutique MonPullMoch</string>
+    <string name="app_footer">Réalisé par P. Laroche, 2019</string>string>
+    <string name="vc_btn_precedent">&lt;</string>
+    <string name="vc_btn_suivant">&gt;</string>
+    <string name="vc_btn_annuler">Annuler</string>
+    <string name="vc_txt_tarifproduit">Tarif : %1$.2f \u20ac</string>
+    <string name="vc_ajout_panier">Produit n°%1$d ajouté au panier</string>
+    <string name="confirm_oui">Oui</string>
+    <string name="confirm_non">Non</string>
+    <string name="confirm_titre">Demande de confirmation</string>
+    <string name="confirm_phrase">Attention, vous allez annuler tous les achats effectués sur cette page. Etes-vous sûr ?</string>
+    <string name="ac_txt_panier">%1$.2f</string>
+    <string name="ac_rb_vente">Vente</string>
+    <string name="ac_rb_catalogue">Catalogue</string>
+</resources>

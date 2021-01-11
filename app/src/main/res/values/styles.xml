@@ -1,0 +1,32 @@
+<resources>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:windowBackground">@color/colorPrimaryLight</item>
+        <item name="android:textSize">@dimen/normal</item>
+        <item name="buttonStyle">@style/monstylebouton</item>
+    </style>
+
+    <style name="monstylebouton" parent="Widget.AppCompat.Button.Colored">
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:fontFamily">@font/gochi_hand</item>
+    </style>
+
+    <style name="boutongrise">
+        <item name="colorButtonNormal">@color/colorButtonNormal</item>
+    </style>
+
+    <style name="text_titre">
+        <item name="android:fontFamily">@font/aladin</item>
+        <item name="android:textSize">@dimen/big</item>
+    </style>
+
+    <style name="text_liste">
+        <item name="android:textSize">@dimen/liste</item>
+    </style>
+
+
+</resources>
