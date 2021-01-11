@@ -163,7 +163,7 @@ public class CategoriesActivity extends AppCompatActivity
     public void onResponse(JSONArray response) {
         try {
             for (int i = 0; i < response.length(); i++) {
-                JSONObject o = response.getJSONObject();
+                JSONObject o = response.getJSONObject(i);
             }
         } catch (Exception e) {
             Log.e("Error", "" + e);
