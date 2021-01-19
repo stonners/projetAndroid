@@ -101,6 +101,7 @@ return root;
         this.rbVente = this.root.findViewById(R.id.rb_vente);
         ListView lvCategories = this.root.findViewById(R.id.lv_liste);
 
+        
         this.adaptateur = new CategoriesAdapter(
             this.getContext(),
             this.listeCategories,
