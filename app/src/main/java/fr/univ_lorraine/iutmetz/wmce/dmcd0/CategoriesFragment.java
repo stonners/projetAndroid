@@ -56,6 +56,7 @@ public class CategoriesFragment extends Fragment
                              ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         root = R.layout.fragment_categories;
+        
 
         // Cas 1 : l'app vient d'être lancée
         if (savedInstanceState == null) {
