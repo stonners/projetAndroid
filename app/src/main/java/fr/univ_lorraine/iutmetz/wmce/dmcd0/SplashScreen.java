@@ -20,8 +20,9 @@ public class SplashScreen extends AppCompatActivity {
         setContentView(R.layout.splash_screen_activity);
 
         final int SPLASH_TIME_OUT = 3000;
+//a denoté aquand le volleye st fini
 
-      /*  this.listeCategories = new ArrayList<>();
+/*        this.listeCategories = new ArrayList<>();
         new Handler().postDelayed(
             ()-> CategorieDAO.findAll(this),
             SPLASH_TIME_OUT);
