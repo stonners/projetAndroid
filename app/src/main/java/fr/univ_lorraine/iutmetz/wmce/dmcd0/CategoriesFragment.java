@@ -55,8 +55,9 @@ public class CategoriesFragment extends Fragment
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        root = R.layout.fragment_categories;
-        
+        View root = inflater.inflate(R.layout.fragment_categories, container, false);
+
+
 
         // Cas 1 : l'app vient d'être lancée
         if (savedInstanceState == null) {

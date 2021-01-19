@@ -16,6 +16,11 @@
         android:name="fr.univ_lorraine.iutmetz.wmce.dmcd0.ui.gallery.GalleryFragment"
         android:label="@string/menu_gallery"
         tools:layout="@layout/fragment_gallery" />
+    <fragment
+        android:id="@+id/nav_boutique"
+        android:name="fr.univ_lorraine.iutmetz.wmce.dmcd0.CategoriesFragment"
+        android:label="@string/menu_boutique"
+        tools:layout="@layout/fragment_categories" />
 
 
 </navigation>

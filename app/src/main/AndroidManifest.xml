@@ -15,19 +15,14 @@
             android:name=".MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <activity android:name=".CategoriesFragment" >
-        </activity>
+
         <activity android:name=".VenteCatalogueActivity" />
         <activity android:name=".SplashScreen" >
             <intent-filter>
