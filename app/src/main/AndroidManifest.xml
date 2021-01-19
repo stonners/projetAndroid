@@ -26,7 +26,7 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <activity android:name=".CategoriesActivity" >
+        <activity android:name=".CategoriesFragment" >
         </activity>
         <activity android:name=".VenteCatalogueActivity" />
         <activity android:name=".SplashScreen" >

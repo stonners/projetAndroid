@@ -8,7 +8,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -58,7 +57,7 @@ public class VenteCatalogueActivity extends AppCompatActivity
             // récupération des paramètes envoyés par CategoriesActivity
             int idCateg = this.getIntent().getIntExtra("id_categ", 1);
             this.panier = this.getIntent().getDoubleExtra("panier", 0);
-            this.roleActivite = this.getIntent().getIntExtra("role_activite", CategoriesActivity.VC_CATALOGUE);
+            this.roleActivite = this.getIntent().getIntExtra("role_activite", CategoriesFragment.VC_CATALOGUE);
 
             // Initialisation des données à afficher
             this.modele = new ArrayList<>();
@@ -142,7 +141,7 @@ public class VenteCatalogueActivity extends AppCompatActivity
         // Si l'activité est utilisée en catalogue, pas d'affichage des boutons "panier" et "annuler"
         ImageView ibPanier = this.findViewById(R.id.ib_panier);
         Button btnAnnuler = this.findViewById(R.id.btn_annuler);
-        if (this.roleActivite == CategoriesActivity.VC_VENTE) {
+        if (this.roleActivite == CategoriesFragment.VC_VENTE) {
             ibPanier.setVisibility(View.VISIBLE);
             btnAnnuler.setVisibility(View.VISIBLE);
         } else {

@@ -7,11 +7,17 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -22,12 +28,16 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import fr.univ_lorraine.iutmetz.wmce.dmcd0.modele.Categorie;
 import fr.univ_lorraine.iutmetz.wmce.dmcd0.tools.ActiviteEnAttenteImage;
 import fr.univ_lorraine.iutmetz.wmce.dmcd0.tools.ImageFromURL;
 
-public class CategoriesActivity extends AppCompatActivity
-    implements Response.Listener<JSONArray>, Response.ErrorListener, AdapterView.OnItemClickListener, ActiviteEnAttenteImage {
+public class CategoriesFragment extends Fragment
+    implements Response.Listener<JSONArray>,
+    Response.ErrorListener,
+//    AdapterView.OnItemClickListener,
+    ActiviteEnAttenteImage {
 
 
     public static final int VC_VENTE = 0;
@@ -36,15 +46,16 @@ public class CategoriesActivity extends AppCompatActivity
     private ArrayList<Categorie> listeCategories;
     private ArrayList<Bitmap> listeImagesCategories;
     private double panier;
-
+    private View root;
     private TextView txtPanier;
     private RadioButton rbVente;
     private CategoriesAdapter adaptateur;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_categories);
+        root = R.layout.fragment_categories;
 
         // Cas 1 : l'app vient d'être lancée
         if (savedInstanceState == null) {
@@ -68,7 +79,7 @@ public class CategoriesActivity extends AppCompatActivity
 
         }
 
-
+return root;
     }
 
     @Override
@@ -84,30 +95,31 @@ public class CategoriesActivity extends AppCompatActivity
 
         super.onStart();
 
-        this.txtPanier = this.findViewById(R.id.txt_panier);
-        this.rbVente = this.findViewById(R.id.rb_vente);
-        ListView lvCategories = this.findViewById(R.id.lv_liste);
+        this.txtPanier = this.root.findViewById(R.id.txt_panier);
+        this.rbVente = this.root.findViewById(R.id.rb_vente);
+        ListView lvCategories = this.root.findViewById(R.id.lv_liste);
 
         this.adaptateur = new CategoriesAdapter(
-            this,
+            this.getContext(),
             this.listeCategories,
             this.listeImagesCategories);
 
         lvCategories.setAdapter(adaptateur);
 
-        lvCategories.setOnItemClickListener(this);
+  //      lvCategories.setOnItemClickListener(this);
 
         this.updatePanier();
     }
 
-    /**
+    //remetre un * apres
+    /* ici
      * clic sur un item de liste : lancement de l'activité VenteCatalgue
      * en spécifiant le requestCode : vc_vente ou vc_catalogue
      */
-    @Override
+  /*  @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-        Intent intent = new Intent(CategoriesActivity.this, VenteCatalogueActivity.class);
+        Intent intent = new Intent(CategoriesFragment.this.getContext(), VenteCatalogueActivity.class);
         intent.putExtra("id_categ", this.listeCategories.get(position).getId());
         intent.putExtra("panier", this.panier);
         if (this.rbVente.isChecked()) {
@@ -119,15 +131,17 @@ public class CategoriesActivity extends AppCompatActivity
         }
 
     }
-
-    /**
+//remetre un * apres
+    /* ici
      * Retour depuis l'activité VenteCatalogue
      *
      * @param requestCode le code d'envoi vers VenteCatalogueActivity
      * @param resultCode  le code renvoyé par VenteCatalogueActivity : retour normal ou annulation
      * @param intent      les paramètres envoyés par VenteCatalogueActivity
      */
-    @Override
+
+    //temporaire (gerald)
+    /*  @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
 
         super.onActivityResult(requestCode, resultCode, intent);

@@ -7,8 +7,6 @@ import android.os.Handler;
 import java.util.ArrayList;
 
 import androidx.appcompat.app.AppCompatActivity;
-import fr.univ_lorraine.iutmetz.wmce.dmcd0.modele.Categorie;
-import fr.univ_lorraine.iutmetz.wmce.dmcd0.tools.CategorieDAO;
 
 public class SplashScreen extends AppCompatActivity {
     private static final int SPLASH_TIME_OUT = 3000;
@@ -32,7 +30,7 @@ public class SplashScreen extends AppCompatActivity {
 
             @Override
             public void run() {
-                Intent i = new Intent(SplashScreen.this,CategoriesActivity.class);
+                Intent i = new Intent(SplashScreen.this, CategoriesFragment.class);
                 startActivity(i);
 
                 finish();

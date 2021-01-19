@@ -8,10 +8,6 @@ import android.util.Log;
 import java.io.InputStream;
 import java.net.URL;
 
-import fr.univ_lorraine.iutmetz.wmce.dmcd0.CategoriesActivity;
-import fr.univ_lorraine.iutmetz.wmce.dmcd0.CategoriesAdapter;
-import fr.univ_lorraine.iutmetz.wmce.dmcd0.VenteCatalogueActivity;
-
 public class ImageFromURL  extends AsyncTask<String,Void,Object[]>{
     private ActiviteEnAttenteImage activite;
 
@@ -37,7 +33,7 @@ public class ImageFromURL  extends AsyncTask<String,Void,Object[]>{
         }
 
 
-        
+
         return new Object[]{image, urlEtIndice[1]};
     }
     @Override
