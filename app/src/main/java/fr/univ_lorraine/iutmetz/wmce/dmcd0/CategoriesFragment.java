@@ -55,7 +55,7 @@ public class CategoriesFragment extends Fragment
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        View root = inflater.inflate(R.layout.fragment_categories, container, false);
+        this.root = inflater.inflate(R.layout.fragment_categories, container, false);
 
 
 
@@ -101,7 +101,7 @@ return root;
         this.rbVente = this.root.findViewById(R.id.rb_vente);
         ListView lvCategories = this.root.findViewById(R.id.lv_liste);
 
-        
+
         this.adaptateur = new CategoriesAdapter(
             this.getContext(),
             this.listeCategories,
