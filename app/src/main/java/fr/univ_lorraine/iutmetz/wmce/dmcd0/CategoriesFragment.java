@@ -29,6 +29,7 @@ import java.util.ArrayList;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import androidx.navigation.Navigation;
 import fr.univ_lorraine.iutmetz.wmce.dmcd0.modele.Categorie;
 import fr.univ_lorraine.iutmetz.wmce.dmcd0.tools.ActiviteEnAttenteImage;
 import fr.univ_lorraine.iutmetz.wmce.dmcd0.tools.ImageFromURL;
@@ -36,7 +37,7 @@ import fr.univ_lorraine.iutmetz.wmce.dmcd0.tools.ImageFromURL;
 public class CategoriesFragment extends Fragment
     implements Response.Listener<JSONArray>,
     Response.ErrorListener,
-//    AdapterView.OnItemClickListener,
+    AdapterView.OnItemClickListener,
     ActiviteEnAttenteImage {
 
 
@@ -109,30 +110,23 @@ return root;
 
         lvCategories.setAdapter(adaptateur);
 
-  //      lvCategories.setOnItemClickListener(this);
+        lvCategories.setOnItemClickListener(this);
 
         this.updatePanier();
     }
 
-    //remetre un * apres
-    /* ici
+
+    /**
      * clic sur un item de liste : lancement de l'activité VenteCatalgue
      * en spécifiant le requestCode : vc_vente ou vc_catalogue
      */
-  /*  @Override
+    @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-        Intent intent = new Intent(CategoriesFragment.this.getContext(), VenteCatalogueActivity.class);
-        intent.putExtra("id_categ", this.listeCategories.get(position).getId());
-        intent.putExtra("panier", this.panier);
-        if (this.rbVente.isChecked()) {
-            intent.putExtra("role_activite", VC_VENTE);
-            startActivityForResult(intent, VC_VENTE);
-        } else {
-            intent.putExtra("role_activite", VC_CATALOGUE);
-            startActivityForResult(intent, VC_CATALOGUE);
-        }
+       Bundle bundle = new Bundle();
+       bundle.putInt("id_categ",this.listeCategories.get(position).getId());
 
+        Navigation.findNavController(view).navigate(R.id.action_nav_boutique_to_venteCatalogueFragment,bundle);
     }
 //remetre un * apres
     /* ici

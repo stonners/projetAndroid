@@ -8,23 +8,28 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.zip.Inflater;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import fr.univ_lorraine.iutmetz.wmce.dmcd0.modele.Produit;
 import fr.univ_lorraine.iutmetz.wmce.dmcd0.tools.ActiviteEnAttenteImage;
 import fr.univ_lorraine.iutmetz.wmce.dmcd0.tools.AnnulerAlerte;
 import fr.univ_lorraine.iutmetz.wmce.dmcd0.tools.ImageFromURL;
 
-public class VenteCatalogueActivity extends AppCompatActivity
-    implements DialogInterface.OnClickListener, ActiviteEnAttenteImage {
+public class VenteCatalogueFragment extends Fragment//AppCompatActivity
+    implements ActiviteEnAttenteImage {
 
 
     public static final int RETOUR = 0;
@@ -34,6 +39,8 @@ public class VenteCatalogueActivity extends AppCompatActivity
     private ArrayList<Produit> modele;
     private ArrayList<Bitmap> listeImagesProduit;
     private double panier;
+
+    private View root;
 
     private int noProduitCourant;
     private int roleActivite;
@@ -48,16 +55,17 @@ public class VenteCatalogueActivity extends AppCompatActivity
     private CategoriesAdapter adaptateur;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                                ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ventecatalogue);
+        this.root= inflater.inflate(R.layout.fragment_ventecatalogue,container,false);
 
         // cas 1 : appel depuis CategoriesActivity
         if (savedInstanceState == null) {
             // récupération des paramètes envoyés par CategoriesActivity
-            int idCateg = this.getIntent().getIntExtra("id_categ", 1);
-            this.panier = this.getIntent().getDoubleExtra("panier", 0);
-            this.roleActivite = this.getIntent().getIntExtra("role_activite", CategoriesFragment.VC_CATALOGUE);
+            int idCateg = this.getArguments().getInt("id_categ", 1);
+            this.panier = this.getActivity().getIntent().getDoubleExtra("panier", 0);
+            this.roleActivite = this.getActivity().getIntent().getIntExtra("role_activite", CategoriesFragment.VC_CATALOGUE);
 
             // Initialisation des données à afficher
             this.modele = new ArrayList<>();
@@ -109,10 +117,11 @@ public class VenteCatalogueActivity extends AppCompatActivity
                 String.valueOf(i));
 
         }
+        return root;
     }
 
     @Override
-    protected void onSaveInstanceState(Bundle outState) {
+    public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
 
         outState.putInt("noProduit", this.noProduitCourant);
@@ -125,22 +134,27 @@ public class VenteCatalogueActivity extends AppCompatActivity
     public void onStart() {
         super.onStart();
 
-        this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        this.bPrecedent = this.findViewById(R.id.btn_precedent);
-        this.bSuivant = this.findViewById(R.id.btn_suivant);
-        this.nomProduit = this.findViewById(R.id.txt_nomproduit);
-        this.descriptionProduit = this.findViewById(R.id.txt_descriptionproduit);
-        this.tarifProduit = this.findViewById(R.id.txt_tarifproduit);
-        this.imgProduit = this.findViewById(R.id.img_produit);
-        this.imgProduitZoom = this.findViewById(R.id.img_produit_zoom);
+       // this.root.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        this.bPrecedent = this.root.findViewById(R.id.btn_precedent);
+        this.bSuivant = this.root.findViewById(R.id.btn_suivant);
+        this.nomProduit = this.root.findViewById(R.id.txt_nomproduit);
+        this.descriptionProduit = this.root.findViewById(R.id.txt_descriptionproduit);
+        this.tarifProduit = this.root.findViewById(R.id.txt_tarifproduit);
+        this.imgProduit = this.root.findViewById(R.id.img_produit);
+        this.imgProduitZoom = this.root.findViewById(R.id.img_produit_zoom);
+
+        this.bPrecedent.setOnClickListener(this::onClickPrecedent);
+        this.bSuivant.setOnClickListener(this::onClickSuivant);
+        this.imgProduit.setOnClickListener(this::onClickProduit);
+        this.imgProduitZoom.setOnClickListener(this::onClickGrandProduit);
 
         this.changeProduit();
         this.gereVisibiliteNavigation();
 
 
         // Si l'activité est utilisée en catalogue, pas d'affichage des boutons "panier" et "annuler"
-        ImageView ibPanier = this.findViewById(R.id.ib_panier);
-        Button btnAnnuler = this.findViewById(R.id.btn_annuler);
+        ImageView ibPanier = this.root.findViewById(R.id.ib_panier);
+        Button btnAnnuler = this.root.findViewById(R.id.btn_annuler);
         if (this.roleActivite == CategoriesFragment.VC_VENTE) {
             ibPanier.setVisibility(View.VISIBLE);
             btnAnnuler.setVisibility(View.VISIBLE);
@@ -157,7 +171,7 @@ public class VenteCatalogueActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == android.R.id.home) {
-            this.onClickRetour();
+       //     this.onClickRetour();
         }
 
         return super.onOptionsItemSelected(item);
@@ -208,7 +222,7 @@ public class VenteCatalogueActivity extends AppCompatActivity
      */
     private void changeProduit() {
 
-        ImageView img = findViewById(R.id.img_produit);
+        ImageView img = root.findViewById(R.id.img_produit);
         if (listeImagesProduit != null) {
                 img.setImageBitmap(this.listeImagesProduit.get(noProduitCourant));
 
@@ -216,7 +230,7 @@ public class VenteCatalogueActivity extends AppCompatActivity
             int id = this.getResources().getIdentifier(
                 this.modele.get(noProduitCourant).getVisuel(),
                 "drawable",
-                this.getPackageName());
+                this.getActivity().getPackageName());
             this.imgProduit.setImageResource(id);
 
         }
@@ -237,7 +251,7 @@ public class VenteCatalogueActivity extends AppCompatActivity
      */
     public void onClickAjouterPanier(View v) {
 
-        Toast.makeText(this, String.format(getString(R.string.vc_ajout_panier), this.noProduitCourant), Toast.LENGTH_LONG).show();
+        Toast.makeText(this.getActivity(), String.format(getString(R.string.vc_ajout_panier), this.noProduitCourant), Toast.LENGTH_LONG).show();
         this.panier += this.modele.get(this.noProduitCourant).getTarif();
     }
 
@@ -273,23 +287,23 @@ public class VenteCatalogueActivity extends AppCompatActivity
     /**
      * clic sur le bouton back du téléphone (celui du bas)
      */
-    @Override
+  //  @Override
     public void onBackPressed() {
-        this.onClickRetour();
+ //       this.getContext().onClickRetour();
     }
 
     /**
      * Gestion du retour vers l'activité CategoriesActivity
      * Permet de factoriser le code pour les deux méthodes précédentes
      */
-    public void onClickRetour() {
+ /*   public void onClickRetour() {
 
         Intent intent = new Intent();
         intent.putExtra("panier", this.panier);
 
         this.setResult(RETOUR, intent);
         this.finish();
-    }
+    }*/
 
     /**
      * clic sur le bouton annuler : demande de confirmation
@@ -299,7 +313,7 @@ public class VenteCatalogueActivity extends AppCompatActivity
     public void onClickAnnuler(View v) {
 
         AnnulerAlerte alerte = new AnnulerAlerte();
-        alerte.show(getSupportFragmentManager(), "suppression");
+        alerte.show(getActivity().getSupportFragmentManager(), "suppression");
     }
 
     /**
@@ -308,12 +322,12 @@ public class VenteCatalogueActivity extends AppCompatActivity
      * @param dialog la boîte de dialogue sur laquelle on a cliqué sur un bouton
      * @param which  le bouton cliqué
      */
-    @Override
+    //@Override
     public void onClick(DialogInterface dialog, int which) {
 
         if (which == DialogInterface.BUTTON_POSITIVE) {
-            this.setResult(ANNULER);
-            this.finish();
+            this.getActivity().setResult(ANNULER);
+            this.getActivity().finish();
         } // sinon, ne rien faire : on reste sur l'activité VenteCatalogue
     }
 

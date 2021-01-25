@@ -20,7 +20,16 @@
         android:id="@+id/nav_boutique"
         android:name="fr.univ_lorraine.iutmetz.wmce.dmcd0.CategoriesFragment"
         android:label="@string/menu_boutique"
-        tools:layout="@layout/fragment_categories" />
+        tools:layout="@layout/fragment_categories" >
+        <action
+            android:id="@+id/action_nav_boutique_to_venteCatalogueFragment"
+            app:destination="@id/venteCatalogueFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/venteCatalogueFragment"
+        android:name="fr.univ_lorraine.iutmetz.wmce.dmcd0.VenteCatalogueFragment"
+        android:label="fragment_ventecatalogue"
+        tools:layout="@layout/fragment_ventecatalogue" />
 
 
 </navigation>

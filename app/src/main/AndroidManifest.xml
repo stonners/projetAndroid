@@ -23,7 +23,7 @@
             android:resource="@array/preloaded_fonts" />
 
 
-        <activity android:name=".VenteCatalogueActivity" />
+        <activity android:name=".VenteCatalogueFragment" />
         <activity android:name=".SplashScreen" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
