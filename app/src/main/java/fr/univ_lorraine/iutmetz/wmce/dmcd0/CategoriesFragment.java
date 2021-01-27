@@ -6,6 +6,7 @@ package fr.univ_lorraine.iutmetz.wmce.dmcd0;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,8 +32,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import androidx.navigation.Navigation;
 import fr.univ_lorraine.iutmetz.wmce.dmcd0.modele.Categorie;
+import fr.univ_lorraine.iutmetz.wmce.dmcd0.modele.Produit;
 import fr.univ_lorraine.iutmetz.wmce.dmcd0.tools.ActiviteEnAttenteImage;
+import fr.univ_lorraine.iutmetz.wmce.dmcd0.tools.CategorieDAO;
 import fr.univ_lorraine.iutmetz.wmce.dmcd0.tools.ImageFromURL;
+import fr.univ_lorraine.iutmetz.wmce.dmcd0.tools.ProduitDAO;
 
 public class CategoriesFragment extends Fragment
     implements Response.Listener<JSONArray>,
@@ -43,11 +47,12 @@ public class CategoriesFragment extends Fragment
 
     public static final int VC_VENTE = 0;
     public static final int VC_CATALOGUE = 1;
-
+    private ArrayList<Produit> listeProduit;
     private ArrayList<Categorie> listeCategories;
     private ArrayList<Bitmap> listeImagesCategories;
     private double panier;
     private View root;
+    private  View view;
     private TextView txtPanier;
     private RadioButton rbVente;
     private CategoriesAdapter adaptateur;
@@ -126,11 +131,13 @@ return root;
      */
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        this.view=view;
+        new Handler().postDelayed(
+                ()-> ProduitDAO.findByCategories(this, position),
+                3000);
 
-       Bundle bundle = new Bundle();
-       bundle.putInt("id_categ",this.listeCategories.get(position).getId());
 
-        Navigation.findNavController(view).navigate(R.id.action_nav_boutique_to_venteCatalogueFragment,bundle);
+
     }
 //remetre un * apres
     /* ici
@@ -177,12 +184,28 @@ return root;
     @Override
     public void onResponse(JSONArray response) {
         try {
-            for (int i = 0; i < response.length(); i++) {
-                JSONObject o = response.getJSONObject(i);
+            for (int i = 0; i  < response.length(); i++ ) {
+                JSONObject produit = response.getJSONObject(i);
+                Log.e("titre",produit+" ");
+                int id = produit.getInt("id_produit");
+                String titre = produit.getString("titre");
+
+                String description = produit.getString("produit");
+                double tarif = produit.getDouble("tarif");
+                String visuel= produit.getString("visuel");
+                int id_categorie= produit.getInt("id_categorie");
+                this.listeProduit.add(new Produit(id, titre, visuel,description,tarif,id_categorie));
             }
+
         } catch (Exception e) {
             Log.e("Error", "" + e);
         }
+
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("listeCategories", listeCategories);
+
+
+        Navigation.findNavController(this.view).navigate(R.id.action_nav_boutique_to_venteCatalogueFragment,bundle);
     }
 
     @Override
