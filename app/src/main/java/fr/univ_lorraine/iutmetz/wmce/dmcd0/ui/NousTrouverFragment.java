@@ -1,4 +1,4 @@
-package fr.univ_lorraine.iutmetz.wmce.dmcd0.ui.gallery;
+package fr.univ_lorraine.iutmetz.wmce.dmcd0.ui;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,13 +12,13 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import fr.univ_lorraine.iutmetz.wmce.dmcd0.R;
 
-public class GalleryFragment extends Fragment {
+public class NousTrouverFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
             ViewGroup container, Bundle savedInstanceState) {
          View root = inflater.inflate(R.layout.fragment_gallery, container, false);
         final TextView textView = root.findViewById(R.id.text_gallery);
-        textView.setText("Gallery !");
+        textView.setText("Nous Trouver !");
         return root;
     }
 }

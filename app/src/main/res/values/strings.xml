@@ -22,7 +22,9 @@
     <string name="nav_gestion_panier">Votre Panier</string>
     <string name="action_settings">Settings</string>
 
-    <string name="menu_home">Home</string>
-    <string name="menu_gallery">Gallery</string>
     <string name="menu_boutique">Boutique</string>
+    <string name="menu_connexion">Connexion</string>
+    <string name="menu_mon_compte">Mon Compte</string>
+    <string name="menu_nous_trouver">Nous Trouver</string>
+    <string name="menu_mentions_legales">Mentions Légales</string>
 </resources>

@@ -6,15 +6,15 @@
     app:startDestination="@+id/nav_boutique">
 
     <fragment
-        android:id="@+id/nav_home"
-        android:name="fr.univ_lorraine.iutmetz.wmce.dmcd0.ui.home.HomeFragment"
-        android:label="@string/menu_home"
+        android:id="@+id/nav_connexion"
+        android:name="fr.univ_lorraine.iutmetz.wmce.dmcd0.ui.ConnexionFragment"
+        android:label="@string/menu_connexion"
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="fr.univ_lorraine.iutmetz.wmce.dmcd0.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
+        android:id="@+id/nav_nous_trouver"
+        android:name="fr.univ_lorraine.iutmetz.wmce.dmcd0.ui.NousTrouverFragment"
+        android:label="@string/menu_nous_trouver"
         tools:layout="@layout/fragment_gallery" />
     <fragment
         android:id="@+id/nav_boutique"
@@ -25,6 +25,11 @@
             android:id="@+id/action_nav_boutique_to_venteCatalogueFragment"
             app:destination="@id/venteCatalogueFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/nav_mentions_legales"
+        android:name="fr.univ_lorraine.iutmetz.wmce.dmcd0.ui.MentionsLegalesFragment"
+        android:label="@string/menu_mentions_legales"
+        tools:layout="@layout/fragment_mentions_legales" />
     <fragment
         android:id="@+id/venteCatalogueFragment"
         android:name="fr.univ_lorraine.iutmetz.wmce.dmcd0.VenteCatalogueFragment"
