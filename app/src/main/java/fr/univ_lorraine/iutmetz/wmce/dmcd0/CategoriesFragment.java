@@ -132,21 +132,19 @@ return root;
 
         Navigation.findNavController(view).navigate(R.id.action_nav_boutique_to_venteCatalogueFragment,bundle);
     }
-//remetre un * apres
-    /* ici
+
+    /**
      * Retour depuis l'activité VenteCatalogue
      *
      * @param requestCode le code d'envoi vers VenteCatalogueActivity
      * @param resultCode  le code renvoyé par VenteCatalogueActivity : retour normal ou annulation
      * @param intent      les paramètres envoyés par VenteCatalogueActivity
      */
-
-    //temporaire (gerald)
-    /*  @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+      @Override
+      public void onActivityResult(int requestCode, int resultCode, Intent intent) {
 
         super.onActivityResult(requestCode, resultCode, intent);
-        if (resultCode == VenteCatalogueActivity.RETOUR) {
+        if (resultCode == VenteCatalogueFragment.RETOUR) {
             if (requestCode == VC_VENTE) {
                 this.panier = intent.getDoubleExtra("panier", 0);
                 this.updatePanier();

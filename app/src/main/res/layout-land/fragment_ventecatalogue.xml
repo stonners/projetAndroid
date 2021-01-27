@@ -23,13 +23,14 @@
         android:id="@+id/ib_panier"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_basket_ajout_48"
-        android:background="@color/colorAccent"
         android:layout_margin="5dp"
+        android:layout_marginBottom="327dp"
+        android:background="@color/colorAccent"
+        android:onClick="onClickAjouterPanier"
         android:padding="5dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:onClick="onClickAjouterPanier"/>
+        android:src="@drawable/ic_basket_ajout_48"
+        app:layout_constraintBottom_toTopOf="@+id/txt_footer"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
         android:id="@+id/btn_precedent"
@@ -141,23 +142,13 @@
         android:spinnerMode="dropdown"
         android:entries="@array/coloris" />
 
-    <Button
-        android:id="@+id/btn_annuler"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/vc_btn_annuler"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_margin="5dp"
-        android:onClick="onClickAnnuler"/>
-
     <TextView
         android:id="@+id/txt_footer"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/tiny"
-        android:text="@string/app_footer"
         android:padding="5dp"
+        android:text="@string/app_footer"
+        android:textSize="@dimen/tiny"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
