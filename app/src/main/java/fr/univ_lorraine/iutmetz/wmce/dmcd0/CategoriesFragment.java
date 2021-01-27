@@ -62,6 +62,8 @@ public class CategoriesFragment extends Fragment
 
         // Cas 1 : l'app vient d'être lancée
         if (savedInstanceState == null) {
+
+           
             this.listeCategories = new ArrayList<>(3);
             this.listeCategories.add(new Categorie(1, "Pulls", "pull1"));
             this.listeCategories.add(new Categorie(2, "Bonnets", "bonnet1"));
