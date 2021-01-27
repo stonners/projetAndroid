@@ -14,7 +14,7 @@ public class MentionsLegalesFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
             ViewGroup container, Bundle savedInstanceState) {
-         View root = inflater.inflate(R.layout.fragment_gallery, container, false);
+         View root = inflater.inflate(R.layout.fragment_mentions_legales, container, false);
         final TextView textView = root.findViewById(R.id.text_gallery);
         textView.setText("Mentions Légales !");
         return root;

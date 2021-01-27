@@ -1,24 +1,35 @@
 package fr.univ_lorraine.iutmetz.wmce.dmcd0.ui;
 
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-import fr.univ_lorraine.iutmetz.wmce.dmcd0.R;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
-public class NousTrouverFragment extends Fragment {
+public class NousTrouverFragment extends SupportMapFragment implements OnMapReadyCallback {
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-            ViewGroup container, Bundle savedInstanceState) {
-         View root = inflater.inflate(R.layout.fragment_gallery, container, false);
-        final TextView textView = root.findViewById(R.id.text_gallery);
-        textView.setText("Nous Trouver !");
-        return root;
+    private GoogleMap googleMap;
+
+    public NousTrouverFragment()  {
+        getMapAsync(this);
+    }
+
+    @Override
+    public void onMapReady(final GoogleMap gmap) {
+        this.googleMap = gmap;
+
+        LatLng shop = new LatLng(49.1296616, 6.154556599999999);
+        this.googleMap.addMarker(new MarkerOptions().position(shop).title("boutique MonPullMoch"));
+        this.googleMap.moveCamera(CameraUpdateFactory.newLatLng(shop));
+        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(shop, 12));
+
+        this.googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+            @Override
+            public void onMapClick(LatLng latLng) {
+
+                googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 2));
+            }
+        });
     }
 }

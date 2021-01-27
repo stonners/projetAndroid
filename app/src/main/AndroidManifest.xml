@@ -3,14 +3,22 @@
     package="fr.univ_lorraine.iutmetz.wmce.dmcd0" >
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
 
     <application
+
+
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDZxo9tynxilZS1NLSAQ5dGWnlBIX3_SJg"/>
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main"
@@ -23,7 +31,7 @@
             android:resource="@array/preloaded_fonts" />
 
 
-        <activity android:name=".VenteCatalogueFragment" />
+
         <activity android:name=".SplashScreen" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
