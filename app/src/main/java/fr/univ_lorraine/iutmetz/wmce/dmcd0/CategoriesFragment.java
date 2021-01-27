@@ -63,12 +63,14 @@ public class CategoriesFragment extends Fragment
         // Cas 1 : l'app vient d'être lancée
         if (savedInstanceState == null) {
 
-           
-            this.listeCategories = new ArrayList<>(3);
+            Bundle bundleObject = this.getActivity().getIntent().getExtras();
+            this.listeCategories = (ArrayList<Categorie>) bundleObject.getSerializable("listeCategories");
+
+         /*   this.listeCategories = new ArrayList<>(3);
             this.listeCategories.add(new Categorie(1, "Pulls", "pull1"));
             this.listeCategories.add(new Categorie(2, "Bonnets", "bonnet1"));
             this.listeCategories.add(new Categorie(3, "Casquettes", "casquette1"));
-
+*/
             this.panier = 0;
         } else {
             // cas 2 : on a pivoté (portrait / paysage) le téléphone
