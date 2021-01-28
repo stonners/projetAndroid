@@ -21,14 +21,15 @@ import fr.univ_lorraine.iutmetz.wmce.dmcd0.tools.MentionDAO;
 
 public class MentionsLegalesFragment extends Fragment implements Response.Listener<String>, Response.ErrorListener {
 
+    private TextView textView;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_mentions_legales, container, false);
-        final TextView textView = root.findViewById(R.id.text_gallery);
+        this.textView = root.findViewById(R.id.text_gallery);
         textView.setText("Mentions Légales !");
 
 
-        MentionDAO.find(this.getContext());
+        MentionDAO.find(this);
 
         return root;
     }
@@ -45,7 +46,7 @@ public class MentionsLegalesFragment extends Fragment implements Response.Listen
 
                 String mentionLegale = response;
             Log.e("onResponse: ", mentionLegale);
-
+                this.textView.setText(mentionLegale);
 
 
         } catch (Exception e) {

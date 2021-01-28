@@ -186,7 +186,7 @@ return root;
     @Override
     public void onErrorResponse(VolleyError error) {
         Log.e("Erreur JSON", error + "");
-        //quand volley sera fini
+
         //    Toast.makeText(this, R.string.ca_erreur_bdd,Toast.LENGTH_LONG).show();
     }
 }
