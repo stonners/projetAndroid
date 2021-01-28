@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,6 +25,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
+
+import fr.univ_lorraine.iutmetz.wmce.dmcd0.modele.Categorie;
 import fr.univ_lorraine.iutmetz.wmce.dmcd0.modele.Produit;
 import fr.univ_lorraine.iutmetz.wmce.dmcd0.tools.ActiviteEnAttenteImage;
 import fr.univ_lorraine.iutmetz.wmce.dmcd0.tools.AnnulerAlerte;
@@ -61,48 +64,17 @@ public class VenteCatalogueFragment extends Fragment//AppCompatActivity
         super.onCreate(savedInstanceState);
         this.root= inflater.inflate(R.layout.fragment_ventecatalogue,container,false);
 
+        this.modele = (ArrayList<Produit>) this.getArguments().getSerializable("listeProduit");
+        Log.e("prod",this.modele + " ");
         // cas 1 : appel depuis CategoriesActivity
         if (savedInstanceState == null) {
             // récupération des paramètes envoyés par CategoriesActivity
-            int idCateg = this.getArguments().getInt("id_categ", 1);
             this.panier = this.getActivity().getIntent().getDoubleExtra("panier", 0);
             this.roleActivite = this.getActivity().getIntent().getIntExtra("role_activite", CategoriesFragment.VC_CATALOGUE);
 
             // Initialisation des données à afficher
-            this.modele = new ArrayList<>();
             this.noProduitCourant = 0;
-            if (idCateg == 1) {
-                Produit p0 = new Produit("A Noël c'est moi qui tient les rennes", "pull0", "Un pull qui ravira les petits et les grands. Tricoté par d'authentiques grand-mères Australiennes, en laine 100% coton naturel issue d'une filière agriculture durable certifiée ISO-2560.", 52, 1);
-                Produit p1 = new Produit("Sonic te kiffe", "pull1", "Inspiré par la saga Séga (c'est plus fort que toi !), un pull 100% gamer qui te permettra de faire baver d'envie tes petits camarades de jeu.", 41.5, 1);
-                Produit p2 = new Produit("Mon renne a les boules", "pull2", "Un grand classique revisité, à la fois renne et sapin de Noël, c'est toi le plus beau quand tu es décoré par ce pull !", 44, 1);
-                Produit p3 = new Produit("Le père Noël a une gastro", "pull3", "Ah, le chic à la Française. Parce que les stars aussi vont sur le pot de temps en temps...", 35.2, 1);
-                Produit p4 = new Produit("Une guirlande de pères Noël", "pull4", "Ils sont tous en rang, ils te regardent, à toi d'être bien sage pour mériter ce pull de fête !", 38, 1);
-                this.modele.add(p0);
-                this.modele.add(p1);
-                this.modele.add(p2);
-                this.modele.add(p3);
-                this.modele.add(p4);
-            } else if (idCateg == 2) {
-                Produit b0 = new Produit("La chaleur des rennes", "bonnet0", "Classique mais efficace, un bonnet dont l'élégance n'est pas à souligner, il vous grattera comme il faut !", 15, 2);
-                Produit b1 = new Produit("Noël Lorientais", "bonnet1", "Idéal pour tous les fans du FC Lorient, mais pas que ! ", 22, 2);
-                Produit b2 = new Produit("Beau comme un Elfe", "bonnet2", "THE bonnet à oreilles, couleurs indémodables pour cette création inspirée de l'univers de Tolkien.", 17, 2);
-                Produit b3 = new Produit("Traineau de rennes", "bonnet3", "Un grand classique, ce magnifique bonnet vous sierra en toutes circonstances, et s'adaptera à toutes vos tenues hivernales.", 15, 2);
-                Produit b4 = new Produit("Real Santa", "bonnet4", "En direct de NYC, avec bois de rennes télescopiques", 20, 2);
-                this.modele.add(b0);
-                this.modele.add(b1);
-                this.modele.add(b2);
-                this.modele.add(b3);
-                this.modele.add(b4);
-            } else if (idCateg == 3) {
-                Produit c0 = new Produit("Les trois amis", "casquette0", "Un trio féérique prendra soin de votre calvitie naissante, vous en serez ravi !", 30, 3);
-                Produit c1 = new Produit("Dall", "casquette1", "Joyeux Noël avec nos petits lutins dansants", 35, 3);
-                Produit c2 = new Produit("Magie de Noël", "casquette2", "Quoi de plus beau qu'un bonhomme de neige avec les enfants quand les premiers flocons tombent du ciel ?", 26, 2);
-                Produit c3 = new Produit("Santa Hangover", "casquette3", "Le Père Noël est bien fatigué sur cette magnifique casquette, mais n'est-ce pas notre lot à tous une fois les fêtes passées ?", 30, 2);
-                this.modele.add(c0);
-                this.modele.add(c1);
-                this.modele.add(c2);
-                this.modele.add(c3);
-            }
+
         } else {
             // cas 2 : gestion du pivot du téléphone portrait / paysage
             this.noProduitCourant = savedInstanceState.getInt("noProduit");
@@ -111,13 +83,13 @@ public class VenteCatalogueFragment extends Fragment//AppCompatActivity
             this.roleActivite = savedInstanceState.getInt("role_activite");
         }
         this.listeImagesProduit = new ArrayList<>();
-        for (int i = 0; i < this.modele.size(); i++) {
+        /*for (int i = 0; i < this.modele.size(); i++) {
             this.listeImagesProduit.add(null);
             ImageFromURL chargement = new ImageFromURL(this);
             chargement.execute("https://devweb.iutmetz.univ-lorraine.fr/~laroche5/WS_PM/" + this.modele.get(i).getVisuel() + ".jpg",
                 String.valueOf(i));
 
-        }
+        }*/
         return root;
     }
 
@@ -224,17 +196,17 @@ public class VenteCatalogueFragment extends Fragment//AppCompatActivity
     private void changeProduit() {
 
         ImageView img = root.findViewById(R.id.img_produit);
-        if (listeImagesProduit != null) {
+        /*if (listeImagesProduit != null) {
                 img.setImageBitmap(this.listeImagesProduit.get(noProduitCourant));
 
-            } else {
+            } else {*/
             int id = this.getResources().getIdentifier(
                 this.modele.get(noProduitCourant).getVisuel(),
                 "drawable",
                 this.getActivity().getPackageName());
             this.imgProduit.setImageResource(id);
 
-        }
+   //     }
         this.nomProduit.setText(this.modele.get(noProduitCourant).getTitre());
         this.descriptionProduit.setText(this.modele.get(noProduitCourant).getDescription());
         this.tarifProduit.setText(

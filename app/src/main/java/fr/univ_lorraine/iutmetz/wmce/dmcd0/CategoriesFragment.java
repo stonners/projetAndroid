@@ -186,7 +186,7 @@ return root;
         try {
             for (int i = 0; i  < response.length(); i++ ) {
                 JSONObject produit = response.getJSONObject(i);
-                Log.e("titre",produit+" ");
+                Log.e("test",produit+" ");
                 int id = produit.getInt("id_produit");
                 String titre = produit.getString("titre");
 
@@ -194,15 +194,17 @@ return root;
                 double tarif = produit.getDouble("tarif");
                 String visuel= produit.getString("visuel");
                 int id_categorie= produit.getInt("id_categorie");
+
                 this.listeProduit.add(new Produit(id, titre, visuel,description,tarif,id_categorie));
             }
 
         } catch (Exception e) {
             Log.e("Error", "" + e);
         }
+        Log.e("test",this.listeProduit+" ");
 
         Bundle bundle = new Bundle();
-        bundle.putSerializable("listeCategories", listeCategories);
+        bundle.putSerializable("listeProduit", listeProduit);
 
 
         Navigation.findNavController(this.view).navigate(R.id.action_nav_boutique_to_venteCatalogueFragment,bundle);
