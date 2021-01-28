@@ -48,10 +48,11 @@ public class MentionsLegalesFragment extends Fragment implements Response.Listen
 
                 String mentionLegale = response;
 
-                String mentionLegale2=mentionLegale.replaceAll("\\. " ,  "\n");
+                 mentionLegale = mentionLegale.replaceAll("\\. " ,  "\n");
+                 mentionLegale = mentionLegale.replaceAll("\\\"" ,  "\n");
                 Log.e("onResponse: ", mentionLegale);
          //   System.out.println("ligne 1"+newLine+"ligne2);
-                this.textView.setText(mentionLegale2);
+                this.textView.setText(mentionLegale);
 
 
         } catch (Exception e) {
