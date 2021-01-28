@@ -64,7 +64,6 @@ public class VenteCatalogueFragment extends Fragment//AppCompatActivity
                                 ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.root= inflater.inflate(R.layout.fragment_ventecatalogue,container,false);
-
         this.modele = (ArrayList<Produit>) this.getArguments().getSerializable("listeProduit");
         Log.e("prod",this.modele + " ");
         // cas 1 : appel depuis CategoriesActivity
