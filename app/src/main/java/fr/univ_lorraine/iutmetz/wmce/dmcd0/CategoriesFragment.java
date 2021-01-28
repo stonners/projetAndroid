@@ -49,7 +49,6 @@ public class CategoriesFragment extends Fragment
     private double panier;
     private View root;
     private TextView txtPanier;
-    private RadioButton rbVente;
     private CategoriesAdapter adaptateur;
 
     @Override
@@ -103,7 +102,6 @@ return root;
         super.onStart();
 
         this.txtPanier = this.root.findViewById(R.id.txt_panier);
-        this.rbVente = this.root.findViewById(R.id.rb_vente);
         ListView lvCategories = this.root.findViewById(R.id.lv_liste);
 
 
