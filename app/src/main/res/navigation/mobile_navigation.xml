@@ -9,7 +9,7 @@
         android:id="@+id/nav_connexion"
         android:name="fr.univ_lorraine.iutmetz.wmce.dmcd0.ui.ConnexionFragment"
         android:label="@string/menu_connexion"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_connexion" />
 
     <fragment
         android:id="@+id/nav_nous_trouver"
