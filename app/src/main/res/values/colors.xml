@@ -10,4 +10,5 @@
     <color name="colorIcons">#FFFFFF</color>
     <color name="colorDivider">#BDBDBD</color>
     <color name="colorButtonNormal">#71C174</color>
+    <color name="favoriteIcon">#F00C3C</color>
 </resources>

@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import java.util.ArrayList;
 import java.util.zip.Inflater;
@@ -57,6 +58,7 @@ public class VenteCatalogueFragment extends Fragment//AppCompatActivity
     private Button bPrecedent;
     private Button bSuivant;
     private CategoriesAdapter adaptateur;
+    private ToggleButton favButton;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -115,11 +117,13 @@ public class VenteCatalogueFragment extends Fragment//AppCompatActivity
         this.tarifProduit = this.root.findViewById(R.id.txt_tarifproduit);
         this.imgProduit = this.root.findViewById(R.id.img_produit);
         this.imgProduitZoom = this.root.findViewById(R.id.img_produit_zoom);
+        this.favButton = this.root.findViewById(R.id.button_favorite);
 
         this.bPrecedent.setOnClickListener(this::onClickPrecedent);
         this.bSuivant.setOnClickListener(this::onClickSuivant);
         this.imgProduit.setOnClickListener(this::onClickProduit);
         this.imgProduitZoom.setOnClickListener(this::onClickGrandProduit);
+        this.favButton.setOnClickListener(this::onClickFav);
 
         this.changeProduit();
         this.gereVisibiliteNavigation();
@@ -132,7 +136,6 @@ public class VenteCatalogueFragment extends Fragment//AppCompatActivity
 
 
         }
-
 
 
     @Override
@@ -253,6 +256,11 @@ public class VenteCatalogueFragment extends Fragment//AppCompatActivity
         this.bSuivant.setVisibility(View.VISIBLE);
         this.bPrecedent.setVisibility(View.VISIBLE);
         this.imgProduitZoom.setVisibility(View.GONE);
+    }
+
+    public void onClickFav(View v) {
+        Toast.makeText(this.getActivity(), "Click!", Toast.LENGTH_SHORT).show();
+        Log.e("onclick","bruh");
     }
 
     /**
