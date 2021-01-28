@@ -18,25 +18,7 @@
 
     </ListView>
 
-    <RadioGroup
-        android:id="@+id/radiogroup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
-        <RadioButton
-            android:id="@+id/rb_vente"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="true"
-            android:text="@string/ac_rb_vente"/>
-        <RadioButton
-            android:id="@+id/rb_catalogue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/ac_rb_catalogue"/>
 
-    </RadioGroup>
 
 
     <ImageView

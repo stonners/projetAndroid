@@ -54,7 +54,6 @@ public class CategoriesFragment extends Fragment
     private View root;
     private  View view;
     private TextView txtPanier;
-    private RadioButton rbVente;
     private CategoriesAdapter adaptateur;
 
     @Override
@@ -108,7 +107,6 @@ return root;
         super.onStart();
 
         this.txtPanier = this.root.findViewById(R.id.txt_panier);
-        this.rbVente = this.root.findViewById(R.id.rb_vente);
         ListView lvCategories = this.root.findViewById(R.id.lv_liste);
 
 
@@ -139,21 +137,19 @@ return root;
 
 
     }
-//remetre un * apres
-    /* ici
+
+    /**
      * Retour depuis l'activité VenteCatalogue
      *
      * @param requestCode le code d'envoi vers VenteCatalogueActivity
      * @param resultCode  le code renvoyé par VenteCatalogueActivity : retour normal ou annulation
      * @param intent      les paramètres envoyés par VenteCatalogueActivity
      */
-
-    //temporaire (gerald)
-    /*  @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+      @Override
+      public void onActivityResult(int requestCode, int resultCode, Intent intent) {
 
         super.onActivityResult(requestCode, resultCode, intent);
-        if (resultCode == VenteCatalogueActivity.RETOUR) {
+        if (resultCode == VenteCatalogueFragment.RETOUR) {
             if (requestCode == VC_VENTE) {
                 this.panier = intent.getDoubleExtra("panier", 0);
                 this.updatePanier();
@@ -213,7 +209,7 @@ return root;
     @Override
     public void onErrorResponse(VolleyError error) {
         Log.e("Erreur JSON", error + "");
-        //quand volley sera fini
+
         //    Toast.makeText(this, R.string.ca_erreur_bdd,Toast.LENGTH_LONG).show();
     }
 }

@@ -127,16 +127,13 @@ public class VenteCatalogueFragment extends Fragment//AppCompatActivity
 
         // Si l'activité est utilisée en catalogue, pas d'affichage des boutons "panier" et "annuler"
         ImageView ibPanier = this.root.findViewById(R.id.ib_panier);
-        Button btnAnnuler = this.root.findViewById(R.id.btn_annuler);
-        if (this.roleActivite == CategoriesFragment.VC_VENTE) {
+
             ibPanier.setVisibility(View.VISIBLE);
-            btnAnnuler.setVisibility(View.VISIBLE);
-        } else {
-            ibPanier.setVisibility(View.GONE);
-            btnAnnuler.setVisibility(View.GONE);
+
+
         }
 
-    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

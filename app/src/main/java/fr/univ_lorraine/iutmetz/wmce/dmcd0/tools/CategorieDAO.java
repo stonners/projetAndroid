@@ -19,7 +19,7 @@ public class CategorieDAO {
 
         // Request a string response from the provided URL.
         JsonArrayRequest jsonRequest = new JsonArrayRequest(Request.Method.GET, url, null,
-                (com.android.volley.Response.Listener<JSONArray>) activite,
+                (Response.Listener<JSONArray>) activite,
                 (Response.ErrorListener) activite);
 
         // Add the request to the RequestQueue.

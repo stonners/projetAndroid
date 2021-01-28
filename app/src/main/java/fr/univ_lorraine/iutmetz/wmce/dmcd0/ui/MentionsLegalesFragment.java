@@ -1,7 +1,7 @@
 package fr.univ_lorraine.iutmetz.wmce.dmcd0.ui;
 
 import android.os.Bundle;
-import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,22 +11,25 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 
 import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import fr.univ_lorraine.iutmetz.wmce.dmcd0.R;
-import fr.univ_lorraine.iutmetz.wmce.dmcd0.tools.CategorieDAO;
+import fr.univ_lorraine.iutmetz.wmce.dmcd0.tools.MentionDAO;
 
-public class MentionsLegalesFragment extends Fragment implements Response.Listener<JSONArray>,Response.ErrorListener{
+public class MentionsLegalesFragment extends Fragment implements Response.Listener<String>, Response.ErrorListener {
 
+    private TextView textView;
     public View onCreateView(@NonNull LayoutInflater inflater,
-            ViewGroup container, Bundle savedInstanceState) {
-         View root = inflater.inflate(R.layout.fragment_mentions_legales, container, false);
-        final TextView textView = root.findViewById(R.id.text_gallery);
+                             ViewGroup container, Bundle savedInstanceState) {
+        View root = inflater.inflate(R.layout.fragment_mentions_legales, container, false);
+        this.textView = root.findViewById(R.id.text_gallery);
         textView.setText("Mentions Légales !");
 
 
-             CategorieDAO.findAll(this.getContext());
+        MentionDAO.find(this);
 
         return root;
     }
@@ -37,7 +40,19 @@ public class MentionsLegalesFragment extends Fragment implements Response.Listen
     }
 
     @Override
-    public void onResponse(JSONArray response) {
+    public void onResponse(String response) {
+        try {
+
+
+                String mentionLegale = response;
+            Log.e("onResponse: ", mentionLegale);
+                this.textView.setText(mentionLegale);
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 }
+
