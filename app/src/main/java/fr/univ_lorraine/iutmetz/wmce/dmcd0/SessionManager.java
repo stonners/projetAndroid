@@ -13,52 +13,34 @@ public class SessionManager {
 SharedPreferences sharedPreferences;
 public  SharedPreferences.Editor editor;
 public Context context;
-int PRIVATE_MODE=0;
+
+
 
 //video a finir :
     //7min10 : https://www.youtube.com/watch?v=bBJo0Gj69Ug
     //https://www.youtube.com/watch?v=q6a4h_7AtOE
-public  static final String PREF_NAME="LOGIN";
-public  static final String LOGIN="IS_LOGIN";
-public  static final String NAME="NAME";
-public  static final String EMAIL="EMAIL";
-    public SessionManager(Context context) {
+
+
+public SessionManager(Context context) {
         this.context = context;
-        sharedPreferences = context.getSharedPreferences(PREF_NAME,PRIVATE_MODE);
+        sharedPreferences = context.getSharedPreferences("test",0);
         editor=sharedPreferences.edit();
     }
-    public void createSession(String name, String email){
-        editor.putBoolean(LOGIN, true);
-        editor.putString("NAME", name);
-        editor.putString(EMAIL, email);
+    public void createSession(String id){
+        editor.putBoolean("login", true);
+        editor.putString("id_client",id);
         editor.apply();
     }
 
     public boolean isLogin(){
-        return sharedPreferences.getBoolean(LOGIN,false);
+    return sharedPreferences.getBoolean("login",false);
     }
-    public void checkLogin(){
-        if (!this.isLogin()){
-            Intent i = new Intent(context, ConnexionFragment.class);
-            context.startActivity(i);
-
-            // a voir si finir
-            //       ((MainActivity)context).finish();
-        }
+    public String getIdClient(){
+    return sharedPreferences.getString("id_client","-1");
     }
-    public HashMap<String, String> getUserDetail(){
-        HashMap<String,String> user= new HashMap<>();
-        user.put(NAME,sharedPreferences.getString(NAME,null));
-        user.put(EMAIL,sharedPreferences.getString(EMAIL,null));
-    return user;
-    }
-
     public  void logout(){
         editor.clear();
         editor.commit();
-        Intent i=new Intent(context,ConnexionFragment.class);
-        context.startActivity(i);
-        // a voir si finir
-        //       ((MainActivity)context).finish();
+
     }
 }
