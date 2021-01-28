@@ -124,7 +124,6 @@ public class VenteCatalogueFragment extends Fragment//AppCompatActivity
         this.bSuivant.setOnClickListener(this::onClickSuivant);
         this.imgProduit.setOnClickListener(this::onClickProduit);
         this.imgProduitZoom.setOnClickListener(this::onClickGrandProduit);
-        this.imgProduitZoom.setOnClickListener(this::onClickGrandProduit);
         this.btnPanier.setOnClickListener(this::onClickAjouterPanier);
         this.favButton.setOnClickListener(this::onClickFav);
 
