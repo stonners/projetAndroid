@@ -55,6 +55,7 @@ public class VenteCatalogueFragment extends Fragment//AppCompatActivity
     private TextView descriptionProduit;
     private ImageView imgProduit;
     private ImageView imgProduitZoom;
+    private ImageView btnPanier;
     private Button bPrecedent;
     private Button bSuivant;
     private CategoriesAdapter adaptateur;
@@ -65,7 +66,6 @@ public class VenteCatalogueFragment extends Fragment//AppCompatActivity
                                 ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.root= inflater.inflate(R.layout.fragment_ventecatalogue,container,false);
-
         this.modele = (ArrayList<Produit>) this.getArguments().getSerializable("listeProduit");
         Log.e("prod",this.modele + " ");
         // cas 1 : appel depuis CategoriesActivity
@@ -117,12 +117,15 @@ public class VenteCatalogueFragment extends Fragment//AppCompatActivity
         this.tarifProduit = this.root.findViewById(R.id.txt_tarifproduit);
         this.imgProduit = this.root.findViewById(R.id.img_produit);
         this.imgProduitZoom = this.root.findViewById(R.id.img_produit_zoom);
+        this.btnPanier = this.root.findViewById(R.id.ib_panier);
         this.favButton = this.root.findViewById(R.id.button_favorite);
 
         this.bPrecedent.setOnClickListener(this::onClickPrecedent);
         this.bSuivant.setOnClickListener(this::onClickSuivant);
         this.imgProduit.setOnClickListener(this::onClickProduit);
         this.imgProduitZoom.setOnClickListener(this::onClickGrandProduit);
+        this.imgProduitZoom.setOnClickListener(this::onClickGrandProduit);
+        this.btnPanier.setOnClickListener(this::onClickAjouterPanier);
         this.favButton.setOnClickListener(this::onClickFav);
 
         this.changeProduit();
@@ -223,10 +226,9 @@ public class VenteCatalogueFragment extends Fragment//AppCompatActivity
      * @param v la vue cliquée (l'ImageButton panier)
      */
     public void onClickAjouterPanier(View v) {
-
         Toast.makeText(this.getActivity(), String.format(getString(R.string.vc_ajout_panier), this.noProduitCourant), Toast.LENGTH_LONG).show();
         this.panier += this.modele.get(this.noProduitCourant).getTarif();
-        Navigation.findNavController(this.getActivity(),R.id.nav_host_fragment).navigate(R.id.menu_gestion_panier);
+     //   Navigation.findNavController(this.getActivity(),R.id.nav_host_fragment).navigate(R.id.menu_gestion_panier);
     }
 
     /**

@@ -112,21 +112,11 @@
         android:layout_marginTop="20dp"
         android:entries="@array/taille"
         android:spinnerMode="dropdown"
-        app:layout_constraintBottom_toTopOf="@+id/sp_colorisproduit"
         app:layout_constraintLeft_toRightOf="@id/scr_descriptionproduit"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/txt_tarifproduit" />
 
-    <Spinner
-        android:id="@+id/sp_colorisproduit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:entries="@array/coloris"
-        android:spinnerMode="dropdown"
-        app:layout_constraintLeft_toRightOf="@id/scr_descriptionproduit"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/sp_tailleproduit" />
+
 
     <ToggleButton
         android:id="@+id/button_favorite"
