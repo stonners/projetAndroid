@@ -14,6 +14,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Array;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import fr.univ_lorraine.iutmetz.wmce.dmcd0.R;
@@ -45,8 +47,11 @@ public class MentionsLegalesFragment extends Fragment implements Response.Listen
 
 
                 String mentionLegale = response;
-            Log.e("onResponse: ", mentionLegale);
-                this.textView.setText(mentionLegale);
+
+                String mentionLegale2=mentionLegale.replaceAll("\\. " ,  "\n");
+                Log.e("onResponse: ", mentionLegale);
+         //   System.out.println("ligne 1"+newLine+"ligne2);
+                this.textView.setText(mentionLegale2);
 
 
         } catch (Exception e) {
