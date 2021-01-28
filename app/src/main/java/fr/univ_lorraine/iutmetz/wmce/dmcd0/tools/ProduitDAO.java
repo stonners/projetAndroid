@@ -1,6 +1,7 @@
 package fr.univ_lorraine.iutmetz.wmce.dmcd0.tools;
 
 import android.content.Context;
+import android.util.Log;
 
 import androidx.fragment.app.Fragment;
 
@@ -15,7 +16,6 @@ import org.json.JSONArray;
 public class ProduitDAO {
 
     public static void findByCategories(Fragment fragment, int idCategory) {
-
         RequestQueue queue = Volley.newRequestQueue(fragment.getContext());
         String url = "https://devweb.iutmetz.univ-lorraine.fr/~moirod1u/WS_PM/php/produits/findByCategories.php?idCategories=" + idCategory;
 

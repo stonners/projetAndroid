@@ -34,27 +34,27 @@ import androidx.navigation.Navigation;
 import fr.univ_lorraine.iutmetz.wmce.dmcd0.modele.Categorie;
 import fr.univ_lorraine.iutmetz.wmce.dmcd0.modele.Produit;
 import fr.univ_lorraine.iutmetz.wmce.dmcd0.tools.ActiviteEnAttenteImage;
-import fr.univ_lorraine.iutmetz.wmce.dmcd0.tools.CategorieDAO;
 import fr.univ_lorraine.iutmetz.wmce.dmcd0.tools.ImageFromURL;
 import fr.univ_lorraine.iutmetz.wmce.dmcd0.tools.ProduitDAO;
 
 public class CategoriesFragment extends Fragment
-    implements Response.Listener<JSONArray>,
-    Response.ErrorListener,
-    AdapterView.OnItemClickListener,
-    ActiviteEnAttenteImage {
+        implements Response.Listener<JSONArray>,
+        Response.ErrorListener,
+        AdapterView.OnItemClickListener,
+        ActiviteEnAttenteImage {
 
 
     public static final int VC_VENTE = 0;
     public static final int VC_CATALOGUE = 1;
-    private ArrayList<Produit> listeProduit;
+
     private ArrayList<Categorie> listeCategories;
     private ArrayList<Bitmap> listeImagesCategories;
     private double panier;
     private View root;
-    private  View view;
     private TextView txtPanier;
     private CategoriesAdapter adaptateur;
+    private View view;
+    private ArrayList<Produit> listeProduit;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -86,11 +86,11 @@ public class CategoriesFragment extends Fragment
             this.listeImagesCategories.add(null);
             ImageFromURL chargement = new ImageFromURL(this);
             chargement.execute("https://devweb.iutmetz.univ-lorraine.fr/~laroche5/WS_PM/" + this.listeCategories.get(i).getVisuel() + ".jpg",
-                String.valueOf(i));
+                    String.valueOf(i));
 
         }
 
-return root;
+        return root;
     }
 
     @Override
@@ -111,9 +111,9 @@ return root;
 
 
         this.adaptateur = new CategoriesAdapter(
-            this.getContext(),
-            this.listeCategories,
-            this.listeImagesCategories);
+                this.getContext(),
+                this.listeCategories,
+                this.listeImagesCategories);
 
         lvCategories.setAdapter(adaptateur);
 
@@ -131,12 +131,13 @@ return root;
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         this.view=view;
         new Handler().postDelayed(
-                ()-> ProduitDAO.findByCategories(this, position),
+                ()-> ProduitDAO.findByCategories(this, this.listeCategories.get(position).getId()),
                 3000);
 
 
 
     }
+
 
     /**
      * Retour depuis l'activité VenteCatalogue
@@ -145,8 +146,8 @@ return root;
      * @param resultCode  le code renvoyé par VenteCatalogueActivity : retour normal ou annulation
      * @param intent      les paramètres envoyés par VenteCatalogueActivity
      */
-      @Override
-      public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
 
         super.onActivityResult(requestCode, resultCode, intent);
         if (resultCode == VenteCatalogueFragment.RETOUR) {
@@ -180,24 +181,22 @@ return root;
     @Override
     public void onResponse(JSONArray response) {
         try {
+            listeProduit=new ArrayList<>();
             for (int i = 0; i  < response.length(); i++ ) {
                 JSONObject produit = response.getJSONObject(i);
-                Log.e("test",produit+" ");
                 int id = produit.getInt("id_produit");
                 String titre = produit.getString("titre");
-
-                String description = produit.getString("produit");
+                String description = produit.getString("description");
                 double tarif = produit.getDouble("tarif");
                 String visuel= produit.getString("visuel");
                 int id_categorie= produit.getInt("id_categorie");
-
                 this.listeProduit.add(new Produit(id, titre, visuel,description,tarif,id_categorie));
             }
 
         } catch (Exception e) {
             Log.e("Error", "" + e);
         }
-        Log.e("test",this.listeProduit+" ");
+
 
         Bundle bundle = new Bundle();
         bundle.putSerializable("listeProduit", listeProduit);
