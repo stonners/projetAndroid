@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_boutique">
+
+
+
+    <fragment
+        android:id="@+id/nav_favoris"
+        android:name="fr.univ_lorraine.iutmetz.wmce.dmcd0.ui.NousTrouverFragment"
+        android:label="@string/menu_nous_trouver"
+        tools:layout="@layout/fragment_nous_trouver" />
+    <fragment
+        android:id="@+id/nav_boutique"
+        android:name="fr.univ_lorraine.iutmetz.wmce.dmcd0.CategoriesFragment"
+        android:label="@string/menu_boutique"
+        tools:layout="@layout/fragment_categories" >
+        <action
+            android:id="@+id/action_nav_boutique_to_venteCatalogueFragment"
+            app:destination="@id/venteCatalogueFragment" />
+    </fragment>
+
+
+
+</navigation>
