@@ -1,12 +1,9 @@
-/*
-  Affichage et achat d'une catégorie de produits*
-
- */
 package fr.univ_lorraine.iutmetz.wmce.dmcd0;
 
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -25,24 +22,29 @@ import java.util.ArrayList;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import fr.univ_lorraine.iutmetz.wmce.dmcd0.modele.Produit;
 import fr.univ_lorraine.iutmetz.wmce.dmcd0.tools.ActiviteEnAttenteImage;
 import fr.univ_lorraine.iutmetz.wmce.dmcd0.tools.AnnulerAlerte;
-import fr.univ_lorraine.iutmetz.wmce.dmcd0.tools.ImageFromURL;
 import fr.univ_lorraine.iutmetz.wmce.dmcd0.tools.FavorisDAO;
 import fr.univ_lorraine.iutmetz.wmce.dmcd0.SessionManager;
+import fr.univ_lorraine.iutmetz.wmce.dmcd0.tools.ProduitDAO;
 
 
 public class VenteCatalogueFragment extends Fragment//AppCompatActivity
-    implements ActiviteEnAttenteImage {
+        implements ActiviteEnAttenteImage {
 
 
     public static final int RETOUR = 0;
     public static final int ANNULER = 1;
 
-
+    private String idClient;
     private ArrayList<Produit> modele;
     private ArrayList<Bitmap> listeImagesProduit;
+    private ArrayList<Integer> listeProduitsFavoris;
     private double panier;
 
     private View root;
@@ -90,7 +92,6 @@ public class VenteCatalogueFragment extends Fragment//AppCompatActivity
             ImageFromURL chargement = new ImageFromURL(this);
             chargement.execute("https://devweb.iutmetz.univ-lorraine.fr/~laroche5/WS_PM/" + this.modele.get(i).getVisuel() + ".jpg",
                 String.valueOf(i));
-
         }*/
         return root;
     }
@@ -109,10 +110,7 @@ public class VenteCatalogueFragment extends Fragment//AppCompatActivity
     public void onStart() {
         super.onStart();
 
-        SessionManager sessionManager = new SessionManager(getActivity());
-        Log.e("test session",sessionManager.getIdClient());
-
-       // this.root.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        // this.root.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         this.bPrecedent = this.root.findViewById(R.id.btn_precedent);
         this.bSuivant = this.root.findViewById(R.id.btn_suivant);
         this.nomProduit = this.root.findViewById(R.id.txt_nomproduit);
@@ -130,7 +128,18 @@ public class VenteCatalogueFragment extends Fragment//AppCompatActivity
         this.btnPanier.setOnClickListener(this::onClickAjouterPanier);
         this.favButton.setOnClickListener(this::onClickFav);
 
-        this.changeProduit();
+        SessionManager sessionManager = new SessionManager(getActivity());
+        Log.e("test session",sessionManager.getIdClient());
+        idClient = sessionManager.getIdClient();
+
+        FavorisDAO.findByClient(this.getActivity(), idClient);
+
+        // delay le chargement
+        new Handler().postDelayed(
+                this::changeProduit
+                , 3000);
+
+        // this.changeProduit();
         this.gereVisibiliteNavigation();
 
     }
@@ -193,29 +202,31 @@ public class VenteCatalogueFragment extends Fragment//AppCompatActivity
      */
     private void changeProduit() {
 
-        // FavorisDAO.findByClient(this, USER_ID);
-    // TODO: FavorisDAO
+        // TODO: FavorisDAO
 
         ImageView img = root.findViewById(R.id.img_produit);
         /*if (listeImagesProduit != null) {
                 img.setImageBitmap(this.listeImagesProduit.get(noProduitCourant));
-
             } else {*/
         int id = this.getResources().getIdentifier(
-            this.modele.get(noProduitCourant).getVisuel(),
-            "drawable",
-            this.getActivity().getPackageName());
+                this.modele.get(noProduitCourant).getVisuel(),
+                "drawable",
+                this.getActivity().getPackageName());
         this.imgProduit.setImageResource(id);
 
         //     }
         this.nomProduit.setText(this.modele.get(noProduitCourant).getTitre());
         this.descriptionProduit.setText(this.modele.get(noProduitCourant).getDescription());
         this.tarifProduit.setText(
-            String.format(
-                getString(R.string.vc_txt_tarifproduit),
-                this.modele.get(noProduitCourant).getTarif()
-            )
+                String.format(
+                        getString(R.string.vc_txt_tarifproduit),
+                        this.modele.get(noProduitCourant).getTarif()
+                )
         );
+        // Check le toggleButton si le produit est en favoris
+        if (listeProduitsFavoris.contains(this.modele.get(noProduitCourant).getId())) {
+            favButton.setChecked(true);
+        }
     }
 
     /**
@@ -252,9 +263,6 @@ public class VenteCatalogueFragment extends Fragment//AppCompatActivity
                 });
         alertDialog.show();
     }
-
-
-        //   Navigation.findNavController(this.getActivity(),R.id.nav_host_fragment).navigate(R.id.menu_gestion_panier);
 
 
     /**
@@ -304,10 +312,8 @@ public class VenteCatalogueFragment extends Fragment//AppCompatActivity
      * Permet de factoriser le code pour les deux méthodes précédentes
      */
  /*   public void onClickRetour() {
-
         Intent intent = new Intent();
         intent.putExtra("panier", this.panier);
-
         this.setResult(RETOUR, intent);
         this.finish();
     }*/
@@ -349,5 +355,37 @@ public class VenteCatalogueFragment extends Fragment//AppCompatActivity
         }
     }
 
+    public void onResponse(JSONArray response) {
+        try {
+            listeProduitsFavoris = new ArrayList<>();
+            for (int i = 0; i < response.length(); i++) {
+                JSONObject produit = response.getJSONObject(i);
+                int idProduitFav = produit.getInt("id_produit");
+                this.listeProduitsFavoris.add(idProduitFav);
+            }
+
+        } catch (Exception e) {
+            Log.e("Error", "" + e);
+        }
+    }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

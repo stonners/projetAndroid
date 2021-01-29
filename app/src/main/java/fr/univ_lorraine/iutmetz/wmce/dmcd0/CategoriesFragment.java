@@ -86,7 +86,7 @@ public class CategoriesFragment extends Fragment
         for (int i = 0; i < this.listeCategories.size(); i++) {
             this.listeImagesCategories.add(null);
             ImageFromURL chargement = new ImageFromURL(this);
-            chargement.execute("https://devweb.iutmetz.univ-lorraine.fr/~laroche5/WS_PM/" + this.listeCategories.get(i).getVisuel() + ".jpg",
+            chargement.execute("https://devweb.iutmetz.univ-lorraine.fr/~moirod1u/WS_PM/" + this.listeCategories.get(i).getVisuel() + ".jpg",
                     String.valueOf(i));
 
         }
@@ -139,9 +139,6 @@ public class CategoriesFragment extends Fragment
         new Handler().postDelayed(
                 ()-> ProduitDAO.findByCategories(this, this.listeCategories.get(position).getId())
                 , 3000);
-
-
-
     }
 
 
