@@ -25,6 +25,10 @@ import androidx.fragment.app.Fragment;
 import fr.univ_lorraine.iutmetz.wmce.dmcd0.modele.Produit;
 import fr.univ_lorraine.iutmetz.wmce.dmcd0.tools.ActiviteEnAttenteImage;
 import fr.univ_lorraine.iutmetz.wmce.dmcd0.tools.AnnulerAlerte;
+import fr.univ_lorraine.iutmetz.wmce.dmcd0.tools.ImageFromURL;
+import fr.univ_lorraine.iutmetz.wmce.dmcd0.tools.FavorisDAO;
+import fr.univ_lorraine.iutmetz.wmce.dmcd0.SessionManager;
+
 
 public class VenteCatalogueFragment extends Fragment//AppCompatActivity
     implements ActiviteEnAttenteImage {
@@ -102,7 +106,10 @@ public class VenteCatalogueFragment extends Fragment//AppCompatActivity
     public void onStart() {
         super.onStart();
 
-        // this.root.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        SessionManager sessionManager = new SessionManager(getActivity());
+        Log.e("test session",sessionManager.getIdClient());
+
+       // this.root.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         this.bPrecedent = this.root.findViewById(R.id.btn_precedent);
         this.bSuivant = this.root.findViewById(R.id.btn_suivant);
         this.nomProduit = this.root.findViewById(R.id.txt_nomproduit);
@@ -182,6 +189,9 @@ public class VenteCatalogueFragment extends Fragment//AppCompatActivity
      * affichage du produit courant
      */
     private void changeProduit() {
+
+        // FavorisDAO.findByClient(this, USER_ID);
+    // TODO: FavorisDAO
 
         ImageView img = root.findViewById(R.id.img_produit);
         /*if (listeImagesProduit != null) {

@@ -12,7 +12,7 @@ import org.json.JSONArray;
 
 public class FavorisDAO {
 
-    public static void findByClient(Context activite, int idClient) {
+    public static void findByClient(Context activite, String idClient) {
 
         RequestQueue queue = Volley.newRequestQueue(activite);
         String url = "https://devweb.iutmetz.univ-lorraine.fr/~moirod/WS_PM/php/favoris/findByClient.php?idClient=" + idClient;

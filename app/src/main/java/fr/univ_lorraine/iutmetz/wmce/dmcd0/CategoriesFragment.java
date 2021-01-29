@@ -37,7 +37,6 @@ import fr.univ_lorraine.iutmetz.wmce.dmcd0.modele.Produit;
 import fr.univ_lorraine.iutmetz.wmce.dmcd0.tools.ActiviteEnAttenteImage;
 import fr.univ_lorraine.iutmetz.wmce.dmcd0.tools.ImageFromURL;
 import fr.univ_lorraine.iutmetz.wmce.dmcd0.tools.ProduitDAO;
-import fr.univ_lorraine.iutmetz.wmce.dmcd0.tools.FavorisDAO;
 
 public class CategoriesFragment extends Fragment
         implements Response.Listener<JSONArray>,
@@ -138,12 +137,8 @@ public class CategoriesFragment extends Fragment
         Navigation.findNavController(view).navigate(R.id.action_nav_boutique_to_venteCatalogueFragment,bundle);
         */
         new Handler().postDelayed(
-                ()-> {
-                    ProduitDAO.findByCategories(this, this.listeCategories.get(position).getId());
-                    // FavorisDAO.findByClient(this, USER_ID);
-                    }
-                ,
-                3000);
+                ()-> ProduitDAO.findByCategories(this, this.listeCategories.get(position).getId())
+                , 3000);
 
 
 
