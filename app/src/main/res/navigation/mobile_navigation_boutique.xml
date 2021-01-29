@@ -19,7 +19,7 @@
         tools:layout="@layout/fragment_categories" >
         <action
             android:id="@+id/action_nav_boutique_to_venteCatalogueFragment"
-            app:destination="@id/venteCatalogueFragment" />
+            app:destination="@id/boutique_venteCatalogue" />
 
     </fragment>
     <fragment
