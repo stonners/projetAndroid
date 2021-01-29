@@ -2,25 +2,31 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_boutique">
+    android:id="@+id/mobile_navigation_boutique"
+    app:startDestination="@id/boutique_categories">
 
 
 
     <fragment
-        android:id="@+id/nav_favoris"
-        android:name="fr.univ_lorraine.iutmetz.wmce.dmcd0.ui.NousTrouverFragment"
-        android:label="@string/menu_nous_trouver"
-        tools:layout="@layout/fragment_nous_trouver" />
+        android:id="@+id/bottom_favoris"
+        android:name="fr.univ_lorraine.iutmetz.wmce.dmcd0.ui.FavorisFragment"
+        android:label="@string/menu_connexion"
+        tools:layout="@layout/fragment_favoris" />
     <fragment
-        android:id="@+id/nav_boutique"
+        android:id="@+id/boutique_categories"
         android:name="fr.univ_lorraine.iutmetz.wmce.dmcd0.CategoriesFragment"
         android:label="@string/menu_boutique"
         tools:layout="@layout/fragment_categories" >
         <action
             android:id="@+id/action_nav_boutique_to_venteCatalogueFragment"
             app:destination="@id/venteCatalogueFragment" />
+
     </fragment>
+    <fragment
+        android:id="@+id/boutique_venteCatalogue"
+        android:name="fr.univ_lorraine.iutmetz.wmce.dmcd0.VenteCatalogueFragment"
+        android:label="fragment_ventecatalogue"
+        tools:layout="@layout/fragment_ventecatalogue" />
 
 
 

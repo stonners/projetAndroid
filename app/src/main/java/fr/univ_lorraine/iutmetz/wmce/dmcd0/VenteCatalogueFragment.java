@@ -5,7 +5,6 @@
 package fr.univ_lorraine.iutmetz.wmce.dmcd0;
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,14 +19,9 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import java.util.ArrayList;
-import java.util.zip.Inflater;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
-
-import fr.univ_lorraine.iutmetz.wmce.dmcd0.modele.Categorie;
 import fr.univ_lorraine.iutmetz.wmce.dmcd0.modele.Produit;
 import fr.univ_lorraine.iutmetz.wmce.dmcd0.tools.ActiviteEnAttenteImage;
 import fr.univ_lorraine.iutmetz.wmce.dmcd0.tools.AnnulerAlerte;
@@ -66,11 +60,11 @@ public class VenteCatalogueFragment extends Fragment//AppCompatActivity
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
-                                ViewGroup container, Bundle savedInstanceState) {
+                             ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.root= inflater.inflate(R.layout.fragment_ventecatalogue,container,false);
+        this.root = inflater.inflate(R.layout.fragment_ventecatalogue, container, false);
         this.modele = (ArrayList<Produit>) this.getArguments().getSerializable("listeProduit");
-        Log.e("prod",this.modele + " ");
+        Log.e("prod", this.modele + " ");
         // cas 1 : appel depuis CategoriesActivity
         if (savedInstanceState == null) {
             // récupération des paramètes envoyés par CategoriesActivity
@@ -136,14 +130,7 @@ public class VenteCatalogueFragment extends Fragment//AppCompatActivity
         this.changeProduit();
         this.gereVisibiliteNavigation();
 
-
-        // Si l'activité est utilisée en catalogue, pas d'affichage des boutons "panier" et "annuler"
-        ImageView ibPanier = this.root.findViewById(R.id.ib_panier);
-
-            ibPanier.setVisibility(View.VISIBLE);
-
-
-        }
+    }
 
 
     @Override
@@ -152,7 +139,7 @@ public class VenteCatalogueFragment extends Fragment//AppCompatActivity
         int id = item.getItemId();
 
         if (id == android.R.id.home) {
-       //     this.onClickRetour();
+            //     this.onClickRetour();
         }
 
         return super.onOptionsItemSelected(item);
@@ -211,13 +198,13 @@ public class VenteCatalogueFragment extends Fragment//AppCompatActivity
                 img.setImageBitmap(this.listeImagesProduit.get(noProduitCourant));
 
             } else {*/
-            int id = this.getResources().getIdentifier(
-                this.modele.get(noProduitCourant).getVisuel(),
-                "drawable",
-                this.getActivity().getPackageName());
-            this.imgProduit.setImageResource(id);
+        int id = this.getResources().getIdentifier(
+            this.modele.get(noProduitCourant).getVisuel(),
+            "drawable",
+            this.getActivity().getPackageName());
+        this.imgProduit.setImageResource(id);
 
-   //     }
+        //     }
         this.nomProduit.setText(this.modele.get(noProduitCourant).getTitre());
         this.descriptionProduit.setText(this.modele.get(noProduitCourant).getDescription());
         this.tarifProduit.setText(
@@ -236,7 +223,7 @@ public class VenteCatalogueFragment extends Fragment//AppCompatActivity
     public void onClickAjouterPanier(View v) {
         Toast.makeText(this.getActivity(), String.format(getString(R.string.vc_ajout_panier), this.noProduitCourant), Toast.LENGTH_LONG).show();
         this.panier += this.modele.get(this.noProduitCourant).getTarif();
-     //   Navigation.findNavController(this.getActivity(),R.id.nav_host_fragment).navigate(R.id.menu_gestion_panier);
+        //   Navigation.findNavController(this.getActivity(),R.id.nav_host_fragment).navigate(R.id.menu_gestion_panier);
     }
 
     /**
@@ -270,15 +257,15 @@ public class VenteCatalogueFragment extends Fragment//AppCompatActivity
 
     public void onClickFav(View v) {
         Toast.makeText(this.getActivity(), "Click!", Toast.LENGTH_SHORT).show();
-        Log.e("onclick","bruh");
+        Log.e("onclick", "bruh");
     }
 
     /**
      * clic sur le bouton back du téléphone (celui du bas)
      */
-  //  @Override
+    //  @Override
     public void onBackPressed() {
- //       this.getContext().onClickRetour();
+        //       this.getContext().onClickRetour();
     }
 
     /**
