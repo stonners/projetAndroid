@@ -7,12 +7,14 @@ package fr.univ_lorraine.iutmetz.wmce.dmcd0;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,6 +23,7 @@ import android.widget.ToggleButton;
 import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import fr.univ_lorraine.iutmetz.wmce.dmcd0.modele.Produit;
 import fr.univ_lorraine.iutmetz.wmce.dmcd0.tools.ActiviteEnAttenteImage;
@@ -223,8 +226,36 @@ public class VenteCatalogueFragment extends Fragment//AppCompatActivity
     public void onClickAjouterPanier(View v) {
         Toast.makeText(this.getActivity(), String.format(getString(R.string.vc_ajout_panier), this.noProduitCourant), Toast.LENGTH_LONG).show();
         this.panier += this.modele.get(this.noProduitCourant).getTarif();
-        //   Navigation.findNavController(this.getActivity(),R.id.nav_host_fragment).navigate(R.id.menu_gestion_panier);
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this.getContext());
+        alertDialog.setTitle("Quantité");
+
+        // Setting Dialog Message
+        alertDialog.setMessage("combien en voulez_vous?");
+        final EditText input = new EditText(this.getContext());
+        input.setInputType(InputType.TYPE_CLASS_NUMBER);
+        alertDialog.setView(input);
+
+        alertDialog.setPositiveButton("YES",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int which) {
+
+
+                    }
+                });
+
+        alertDialog.setNegativeButton("NO",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Write your code here to execute after dialog
+                        dialog.cancel();
+                    }
+                });
+        alertDialog.show();
     }
+
+
+        //   Navigation.findNavController(this.getActivity(),R.id.nav_host_fragment).navigate(R.id.menu_gestion_panier);
+
 
     /**
      * clic sur l'image du produit : affichage de la version zoomée du produit

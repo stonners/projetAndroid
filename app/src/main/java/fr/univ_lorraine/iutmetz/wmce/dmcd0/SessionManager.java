@@ -35,9 +35,12 @@ public SessionManager(Context context) {
     public boolean isLogin(){
     return sharedPreferences.getBoolean("login",false);
     }
+
     public String getIdClient(){
+
     return sharedPreferences.getString("id_client","-1");
     }
+
     public  void logout(){
         editor.clear();
         editor.commit();
