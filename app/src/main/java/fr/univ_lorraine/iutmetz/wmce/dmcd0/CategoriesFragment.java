@@ -139,9 +139,6 @@ public class CategoriesFragment extends Fragment
         new Handler().postDelayed(
                 ()-> ProduitDAO.findByCategories(this, this.listeCategories.get(position).getId())
                 , 3000);
-
-
-
     }
 
 
