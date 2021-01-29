@@ -30,34 +30,30 @@ public class FavorisDAO {
 
     public static void updateFavStatus(Fragment fragment, String idClient, int idProduit, boolean favStatus) {
 
-        String url;
+        RequestQueue queue = Volley.newRequestQueue(fragment.getContext());
+        JsonArrayRequest jsonRequest;
 
         if (favStatus == true) {
-            RequestQueue queue = Volley.newRequestQueue(fragment.getContext());
 
-            url = "https://devweb.iutmetz.univ-lorraine.fr/~moirod1u/WS_PM/php/favoris/createFavoris.php?idClient=" + idClient + "&idProduit=" + idProduit;
+            String url = "https://devweb.iutmetz.univ-lorraine.fr/~moirod1u/WS_PM/php/favoris/createFavoris.php?idClient=" + idClient + "&idProduit=" + idProduit;
 
             // Request a string response from the provided URL.
-            JsonArrayRequest jsonRequest = new JsonArrayRequest(Request.Method.POST, url, null,
+            jsonRequest = new JsonArrayRequest(Request.Method.POST, url, null,
                     (Response.Listener<JSONArray>) fragment,
                     (Response.ErrorListener) fragment);
-
-            // Add the request to the RequestQueue.
-            queue.add(jsonRequest);
         }
         else {
-            RequestQueue queue = Volley.newRequestQueue(fragment.getContext());
 
-            url = "https://devweb.iutmetz.univ-lorraine.fr/~moirod1u/WS_PM/php/favoris/deleteFavoris.php?idClient=" + idClient + "&idProduit=" + idProduit;
+            String url = "https://devweb.iutmetz.univ-lorraine.fr/~moirod1u/WS_PM/php/favoris/deleteFavoris.php?idClient=" + idClient + "&idProduit=" + idProduit;
 
             // Request a string response from the provided URL.
-            JsonArrayRequest jsonRequest = new JsonArrayRequest(Request.Method.DELETE, url, null,
+            jsonRequest = new JsonArrayRequest(Request.Method.DELETE, url, null,
                     (Response.Listener<JSONArray>) fragment,
                     (Response.ErrorListener) fragment);
-
-            // Add the request to the RequestQueue.
-            queue.add(jsonRequest);
         }
+
+        // Add the request to the RequestQueue.
+        queue.add(jsonRequest);
 
     }
 
