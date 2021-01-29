@@ -69,6 +69,7 @@ public EditText textIdentifiant;
 
             if (id.compareTo("\"-1\"")!=0) {
                 SessionManager session=new SessionManager(this.getContext());
+                id = id.replaceAll("\"" ,  "");
                 session.createSession(id);
                 Log.e("teeeeet","ok ");
                 Bundle bundle = new Bundle();
