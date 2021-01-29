@@ -7,14 +7,15 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import fr.univ_lorraine.iutmetz.wmce.dmcd0.R;
 
-public class FavorisFragment {
+public class FavorisFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_panier, container, false);
+        View root = inflater.inflate(R.layout.fragment_favoris, container, false);
         TextView textView = root.findViewById(R.id.text_gallery);
-        textView.setText("Panier !");
+        textView.setText("Favoris !");
         return root;
 }
 }

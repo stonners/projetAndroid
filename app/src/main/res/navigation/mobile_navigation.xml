@@ -18,9 +18,9 @@
         tools:layout="@layout/fragment_nous_trouver" />
     <fragment
         android:id="@+id/nav_boutique"
-        android:name="fr.univ_lorraine.iutmetz.wmce.dmcd0.CategoriesFragment"
+        android:name="fr.univ_lorraine.iutmetz.wmce.dmcd0.ui.BoutiqueFragment"
         android:label="@string/menu_boutique"
-        tools:layout="@layout/fragment_categories" >
+        tools:layout="@layout/fragment_boutique" >
         <action
             android:id="@+id/action_nav_boutique_to_venteCatalogueFragment"
             app:destination="@id/venteCatalogueFragment" />
@@ -35,6 +35,7 @@
         android:name="fr.univ_lorraine.iutmetz.wmce.dmcd0.VenteCatalogueFragment"
         android:label="fragment_ventecatalogue"
         tools:layout="@layout/fragment_ventecatalogue" />
+
 
 
 </navigation>

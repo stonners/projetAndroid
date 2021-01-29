@@ -9,9 +9,9 @@
 
     <fragment
         android:id="@+id/bottom_favoris"
-        android:name="fr.univ_lorraine.iutmetz.wmce.dmcd0.ui.NousTrouverFragment"
-        android:label="@string/menu_nous_trouver"
-        tools:layout="@layout/fragment_nous_trouver" />
+        android:name="fr.univ_lorraine.iutmetz.wmce.dmcd0.ui.FavorisFragment"
+        android:label="@string/menu_connexion"
+        tools:layout="@layout/fragment_favoris" />
     <fragment
         android:id="@+id/boutique_categories"
         android:name="fr.univ_lorraine.iutmetz.wmce.dmcd0.CategoriesFragment"
