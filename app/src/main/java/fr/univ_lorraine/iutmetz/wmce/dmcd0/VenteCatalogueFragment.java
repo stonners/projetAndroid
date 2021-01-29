@@ -210,8 +210,6 @@ public class VenteCatalogueFragment extends Fragment//AppCompatActivity
      */
     private void changeProduit() {
 
-        // TODO: FavorisDAO
-
         ImageView img = root.findViewById(R.id.img_produit);
         /*if (listeImagesProduit != null) {
                 img.setImageBitmap(this.listeImagesProduit.get(noProduitCourant));
@@ -232,12 +230,7 @@ public class VenteCatalogueFragment extends Fragment//AppCompatActivity
                 )
         );
         // Check le toggleButton si le produit est en favoris
-        if (listeProduitsFavoris.contains(this.modele.get(noProduitCourant).getId())) {
-            favButton.setChecked(true);
-        }
-        else {
-            favButton.setChecked(false);
-        }
+        favButton.setChecked(listeProduitsFavoris.contains(this.modele.get(noProduitCourant).getId()));
     }
 
     /**
