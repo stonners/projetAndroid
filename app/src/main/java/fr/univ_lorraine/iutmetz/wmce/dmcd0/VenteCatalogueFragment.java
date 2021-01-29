@@ -32,8 +32,10 @@ import org.json.JSONObject;
 import fr.univ_lorraine.iutmetz.wmce.dmcd0.modele.Produit;
 import fr.univ_lorraine.iutmetz.wmce.dmcd0.tools.ActiviteEnAttenteImage;
 import fr.univ_lorraine.iutmetz.wmce.dmcd0.tools.AnnulerAlerte;
+import fr.univ_lorraine.iutmetz.wmce.dmcd0.tools.CategorieDAO;
 import fr.univ_lorraine.iutmetz.wmce.dmcd0.tools.FavorisDAO;
 import fr.univ_lorraine.iutmetz.wmce.dmcd0.SessionManager;
+import fr.univ_lorraine.iutmetz.wmce.dmcd0.tools.PanierDAO;
 import fr.univ_lorraine.iutmetz.wmce.dmcd0.tools.ProduitDAO;
 
 
@@ -255,12 +257,17 @@ public class VenteCatalogueFragment extends Fragment//AppCompatActivity
         alertDialog.setMessage("combien en voulez_vous?");
         final EditText input = new EditText(this.getContext());
         input.setInputType(InputType.TYPE_CLASS_NUMBER);
+        String id_client=this.idClient;
+        int id_produit=this.modele.get(this.noProduitCourant).getId();
+        Fragment frag=this;
         alertDialog.setView(input);
 
         alertDialog.setPositiveButton("YES",
                 new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog,int which) {
-
+                    public void onClick(DialogInterface dialog, int which) {
+                        new Handler().postDelayed(
+                                ()-> PanierDAO.createdPanier(frag,id_produit,Integer.parseInt(input.getText().toString()),id_client),
+                                1000);
 
                     }
                 });
