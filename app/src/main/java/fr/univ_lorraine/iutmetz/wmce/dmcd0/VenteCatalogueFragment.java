@@ -24,6 +24,9 @@ import java.util.ArrayList;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -36,7 +39,9 @@ import fr.univ_lorraine.iutmetz.wmce.dmcd0.tools.ProduitDAO;
 
 
 public class VenteCatalogueFragment extends Fragment//AppCompatActivity
-    implements ActiviteEnAttenteImage {
+    implements Response.Listener<JSONArray>,
+        Response.ErrorListener,
+        ActiviteEnAttenteImage {
 
 
     public static final int RETOUR = 0;
@@ -134,12 +139,12 @@ public class VenteCatalogueFragment extends Fragment//AppCompatActivity
         Log.e("test session",sessionManager.getIdClient());
         idClient = sessionManager.getIdClient();
 
-        FavorisDAO.findByClient(this.getActivity(), idClient);
+        FavorisDAO.findByClient(this, idClient);
 
         // delay le chargement
         new Handler().postDelayed(
                 this::changeProduit
-                , 3000);
+                , 500);
 
         // this.changeProduit();
         this.gereVisibiliteNavigation();
@@ -230,6 +235,9 @@ public class VenteCatalogueFragment extends Fragment//AppCompatActivity
         if (listeProduitsFavoris.contains(this.modele.get(noProduitCourant).getId())) {
             favButton.setChecked(true);
         }
+        else {
+            favButton.setChecked(false);
+        }
     }
 
     /**
@@ -273,8 +281,16 @@ public class VenteCatalogueFragment extends Fragment//AppCompatActivity
     }
 
     public void onClickFav(View v) {
-        Toast.makeText(this.getActivity(), "Click!", Toast.LENGTH_SHORT).show();
-        Log.e("onclick", "bruh");
+        String text;
+        if (favButton.isChecked()) {
+            FavorisDAO.updateFavStatus(this, idClient, this.modele.get(noProduitCourant).getId(), true);
+            text = "Produit ajouté aux favoris";
+        }
+        else {
+            FavorisDAO.updateFavStatus(this, idClient, this.modele.get(noProduitCourant).getId(), false);
+            text = "Produit retiré des favoris";
+        }
+        Toast.makeText(this.getActivity(), text, Toast.LENGTH_SHORT).show();
     }
 
     /**
@@ -335,6 +351,7 @@ public class VenteCatalogueFragment extends Fragment//AppCompatActivity
         }
     }
 
+    @Override
     public void onResponse(JSONArray response) {
         try {
             listeProduitsFavoris = new ArrayList<>();
@@ -347,6 +364,13 @@ public class VenteCatalogueFragment extends Fragment//AppCompatActivity
         } catch (Exception e) {
             Log.e("Error", "" + e);
         }
+    }
+
+    @Override
+    public void onErrorResponse(VolleyError error) {
+        Log.e("Erreur JSON", error + "");
+
+        //    Toast.makeText(this, R.string.ca_erreur_bdd,Toast.LENGTH_LONG).show();
     }
 
 }
