@@ -130,11 +130,12 @@ public class CategoriesFragment extends Fragment
      */
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Bundle bundle = new Bundle();
+        this.view=view;
+        /*Bundle bundle = new Bundle();
         bundle.putInt("id_categ",this.listeCategories.get(position).getId());
 
         Navigation.findNavController(view).navigate(R.id.action_nav_boutique_to_venteCatalogueFragment,bundle);
-        this.view=view;
+        */
         new Handler().postDelayed(
                 ()-> ProduitDAO.findByCategories(this, this.listeCategories.get(position).getId())
                 , 3000);
